@@ -1,0 +1,331 @@
+================================================================================
+   🧪 UCI-HAR Comprehensive Comparison (✨ OPTIMIZED)
+   SUPERVISED vs TRUE SELF-SUPERVISED LEARNING
+   Architecture: ResNet + Transformer Encoder
+================================================================================
+
+   📋 실험 설계:
+   1. 동일한 백본 (ResNet + Transformer)
+   2. 2레벨 전이 데이터셋 (Moderate/Strong)
+   3. 6가지 설정 비교:
+      ├─ Supervised × (Linear, Hyperbolic)
+      ├─ SSL Linear Eval × (Linear, Hyperbolic)
+      └─ SSL Fine-tune × (Linear, Hyperbolic)
+================================================================================
+
+   ⚙️  Supervised 설정:
+   - Epochs: 50
+   - Batch size: 128
+   - Learning rate: 0.0003
+   - Warmup: 0 epochs
+   - EMA decay: Disabled
+   - Consistency weight: 0.0
+   - Training: End-to-end with labels + consistency loss
+
+   ⚙️  SSL 설정:
+   - Stage 1 (Pretrain): 100 epochs, batch=512, lr=0.001
+     → Contrastive learning only (NO LABELS)
+     → Label-independent augmentation
+     → Warmup: 0 epochs
+     → EMA decay: Disabled
+   - Stage 2 (Eval/FT): 50 epochs, batch=128, lr=0.0003
+     → Linear Eval: Freeze backbone
+     → Fine-tune: Train all (backbone LR × 0.1)
+     → Consistency weight: 0.0
+
+   🔧 Augmentations (SSL - Optimized):
+   - Jitter (scale=0.05)
+   - Scaling (range=(0.8, 1.2))
+   - Channel Drop (prob=0.2)
+   - Time Warp (prob=0.1) ✅ 0.3→0.10
+   - Cutout (prob=0.2, ratio=0.1) ✅ 0.2→0.10
+   - ALL label-independent!
+
+   🏗️  Architecture:
+   - Backbone: ResNet(layers=[2,2,2]) + Transformer(heads=4, layers=2)
+   - d_model: 128, dropout: 0.1
+   - Classifier: Linear vs Hyperbolic (c_init=1.0, learnable ✅)
+   - Projection dim (SSL): 128
+
+   🔬 SSL Contrastive Learning:
+   - Loss: NT-Xent (InfoNCE)
+   - Temperature: 0.07
+   - Negative samples: 2*batch_size - 2
+
+   ✨ 최적화 개선사항:
+   - 정규화 버그 수정 (전이 테스트셋)
+   - Cosine Annealing + Warmup
+   - EMA (Exponential Moving Average)
+   - 백본/헤드 분리 학습률 (Fine-tune)
+   - 전이-유사 일관성 손실 (Tail-Head Stitch)
+   - 증강 강도 최적화 (경계 정보 보존)
+   - 학습 가능한 Hyperbolic c
+   - 2레벨 전이 시나리오 (Moderate/Strong)
+================================================================================
+
+
+📦 Loading UCI-HAR Dataset...
+[OK] train: X(7352, 9, 128), y(7352,)
+[OK] test: X(2947, 9, 128), y(2947,)
+   - Train samples: 7352
+   - Test samples: 2947
+
+================================================================================
+    🔬 TRANSITIONAL TEST SETS 생성 (2레벨 강도)
+================================================================================
+   - [Moderate] STANDING↔SITTING (p=0.50, mix=0.40): 511개 샘플 변형
+   - [Moderate] WALKING↔WALKING_UPSTAIRS (p=0.55, mix=0.42): 531개 샘플 변형
+   - [Strong] STANDING↔SITTING (p=0.70, mix=0.55): 715개 샘플 변형
+   - [Strong] WALKING↔WALKING_UPSTAIRS (p=0.65, mix=0.52): 628개 샘플 변형
+   - [Strong] SITTING↔LAYING (p=0.75, mix=0.58): 770개 샘플 변형
+
+================================================================================
+   실험: Supervised_Linear
+================================================================================
+
+📚 Supervised Learning (With Labels)
+--------------------------------------------------------------------------------
+Training for 50 epochs...
+[Supervised 01/50] Train L:0.5001 CE:0.5001 Cons:0.0000 A:0.8864 | Test A:0.9260 F1:0.9269
+[Supervised 10/50] Train L:0.3215 CE:0.3215 Cons:0.0000 A:0.9597 | Test A:0.9328 F1:0.9328
+[Supervised 20/50] Train L:0.3040 CE:0.3040 Cons:0.0000 A:0.9642 | Test A:0.9284 F1:0.9290
+[Supervised 30/50] Train L:0.2881 CE:0.2881 Cons:0.0000 A:0.9748 | Test A:0.9413 F1:0.9416
+[Supervised 40/50] Train L:0.2874 CE:0.2874 Cons:0.0000 A:0.9769 | Test A:0.9525 F1:0.9532
+[Supervised 50/50] Train L:0.2775 CE:0.2775 Cons:0.0000 A:0.9826 | Test A:0.9454 F1:0.9457
+✅ Best Test Acc: 0.9545
+
+   🔍 전이 테스트셋 평가...
+     - [Moderate] Scenario 1 (STANDING↔SITTING): Acc=0.6183 F1=0.5869 (Drop=0.3363)
+     - [Moderate] Scenario 2 (WALKING↔WALKING_UPSTAIRS): Acc=0.6023 F1=0.5674 (Drop=0.3522)
+     - [Strong] Scenario 3 (STANDING↔SITTING): Acc=0.6026 F1=0.5627 (Drop=0.3519)
+     - [Strong] Scenario 4 (WALKING↔WALKING_UPSTAIRS): Acc=0.5894 F1=0.5495 (Drop=0.3651)
+     - [Strong] Scenario 5 (SITTING↔LAYING): Acc=0.6166 F1=0.5787 (Drop=0.3380)
+
+================================================================================
+   실험: Supervised_Hyperbolic
+================================================================================
+
+📚 Supervised Learning (With Labels)
+--------------------------------------------------------------------------------
+Training for 50 epochs...
+[Supervised 01/50] Train L:1.4078 CE:1.4078 Cons:0.0000 A:0.8394 | Test A:0.9209 F1:0.9208
+[Supervised 10/50] Train L:0.5614 CE:0.5614 Cons:0.0000 A:0.9589 | Test A:0.9002 F1:0.9013
+[Supervised 20/50] Train L:0.3679 CE:0.3679 Cons:0.0000 A:0.9640 | Test A:0.9291 F1:0.9309
+[Supervised 30/50] Train L:0.3104 CE:0.3104 Cons:0.0000 A:0.9763 | Test A:0.9253 F1:0.9262
+[Supervised 40/50] Train L:0.2853 CE:0.2853 Cons:0.0000 A:0.9791 | Test A:0.9403 F1:0.9419
+[Supervised 50/50] Train L:0.2724 CE:0.2724 Cons:0.0000 A:0.9879 | Test A:0.9505 F1:0.9505
+✅ Best Test Acc: 0.9505
+
+   🔍 전이 테스트셋 평가...
+     - [Moderate] Scenario 1 (STANDING↔SITTING): Acc=0.6023 F1=0.5079 (Drop=0.3482)
+     - [Moderate] Scenario 2 (WALKING↔WALKING_UPSTAIRS): Acc=0.6274 F1=0.5442 (Drop=0.3230)
+     - [Strong] Scenario 3 (STANDING↔SITTING): Acc=0.5694 F1=0.4697 (Drop=0.3811)
+     - [Strong] Scenario 4 (WALKING↔WALKING_UPSTAIRS): Acc=0.6274 F1=0.5453 (Drop=0.3230)
+     - [Strong] Scenario 5 (SITTING↔LAYING): Acc=0.6047 F1=0.5018 (Drop=0.3458)
+
+================================================================================
+   실험: SSL_LinearEval_Linear
+================================================================================
+
+📚 Stage 1: Self-Supervised Pretraining (No Labels)
+--------------------------------------------------------------------------------
+Pretraining for 100 epochs...
+[Pretrain 001/100] SSL Loss: 4.8186
+[Pretrain 010/100] SSL Loss: 1.8973
+[Pretrain 020/100] SSL Loss: 1.0982
+[Pretrain 030/100] SSL Loss: 1.0177
+[Pretrain 040/100] SSL Loss: 1.0625
+[Pretrain 050/100] SSL Loss: 0.8192
+[Pretrain 060/100] SSL Loss: 0.7844
+[Pretrain 070/100] SSL Loss: 0.7696
+[Pretrain 080/100] SSL Loss: 0.8754
+[Pretrain 090/100] SSL Loss: 0.5887
+[Pretrain 100/100] SSL Loss: 0.6765
+✅ Pretraining Complete!
+
+📚 Stage 2: LINEAR_EVAL (With Labels)
+--------------------------------------------------------------------------------
+linear_eval for 50 epochs...
+[linear_eval 01/50] Train L:1.8074 A:0.2393 | Test A:0.4581 F1:0.4450
+[linear_eval 10/50] Train L:0.5546 A:0.9125 | Test A:0.8955 F1:0.8941
+[linear_eval 20/50] Train L:0.4666 A:0.9264 | Test A:0.9063 F1:0.9056
+[linear_eval 30/50] Train L:0.4429 A:0.9342 | Test A:0.9108 F1:0.9101
+[linear_eval 40/50] Train L:0.4306 A:0.9380 | Test A:0.9121 F1:0.9115
+[linear_eval 50/50] Train L:0.4221 A:0.9418 | Test A:0.9128 F1:0.9123
+✅ Best Test Acc: 0.9138
+
+   🔍 전이 테스트셋 평가...
+     - [Moderate] Scenario 1 (STANDING↔SITTING): Acc=0.3936 F1=0.2939 (Drop=0.5202)
+     - [Moderate] Scenario 2 (WALKING↔WALKING_UPSTAIRS): Acc=0.4096 F1=0.3114 (Drop=0.5042)
+     - [Strong] Scenario 3 (STANDING↔SITTING): Acc=0.3773 F1=0.2726 (Drop=0.5365)
+     - [Strong] Scenario 4 (WALKING↔WALKING_UPSTAIRS): Acc=0.4089 F1=0.3102 (Drop=0.5049)
+     - [Strong] Scenario 5 (SITTING↔LAYING): Acc=0.3817 F1=0.2798 (Drop=0.5321)
+
+================================================================================
+   실험: SSL_LinearEval_Hyperbolic
+================================================================================
+
+📚 Stage 1: Self-Supervised Pretraining (No Labels)
+--------------------------------------------------------------------------------
+Pretraining for 100 epochs...
+[Pretrain 001/100] SSL Loss: 4.8186
+[Pretrain 010/100] SSL Loss: 1.8973
+[Pretrain 020/100] SSL Loss: 1.0982
+[Pretrain 030/100] SSL Loss: 1.0177
+[Pretrain 040/100] SSL Loss: 1.0625
+[Pretrain 050/100] SSL Loss: 0.8192
+[Pretrain 060/100] SSL Loss: 0.7844
+[Pretrain 070/100] SSL Loss: 0.7696
+[Pretrain 080/100] SSL Loss: 0.8754
+[Pretrain 090/100] SSL Loss: 0.5887
+[Pretrain 100/100] SSL Loss: 0.6765
+✅ Pretraining Complete!
+
+📚 Stage 2: LINEAR_EVAL (With Labels)
+--------------------------------------------------------------------------------
+linear_eval for 50 epochs...
+[linear_eval 01/50] Train L:1.6645 A:0.6007 | Test A:0.8392 F1:0.8281
+[linear_eval 10/50] Train L:0.6622 A:0.9298 | Test A:0.9094 F1:0.9086
+[linear_eval 20/50] Train L:0.4351 A:0.9411 | Test A:0.9192 F1:0.9186
+[linear_eval 30/50] Train L:0.3778 A:0.9497 | Test A:0.9189 F1:0.9182
+[linear_eval 40/50] Train L:0.3584 A:0.9524 | Test A:0.9237 F1:0.9231
+[linear_eval 50/50] Train L:0.3506 A:0.9559 | Test A:0.9233 F1:0.9227
+✅ Best Test Acc: 0.9277
+
+   🔍 전이 테스트셋 평가...
+     - [Moderate] Scenario 1 (STANDING↔SITTING): Acc=0.4225 F1=0.3443 (Drop=0.5053)
+     - [Moderate] Scenario 2 (WALKING↔WALKING_UPSTAIRS): Acc=0.4252 F1=0.3456 (Drop=0.5025)
+     - [Strong] Scenario 3 (STANDING↔SITTING): Acc=0.4041 F1=0.3181 (Drop=0.5236)
+     - [Strong] Scenario 4 (WALKING↔WALKING_UPSTAIRS): Acc=0.4221 F1=0.3408 (Drop=0.5056)
+     - [Strong] Scenario 5 (SITTING↔LAYING): Acc=0.4072 F1=0.3235 (Drop=0.5205)
+
+================================================================================
+   실험: SSL_FineTune_Linear
+================================================================================
+
+📚 Stage 1: Self-Supervised Pretraining (No Labels)
+--------------------------------------------------------------------------------
+Pretraining for 100 epochs...
+[Pretrain 001/100] SSL Loss: 4.8186
+[Pretrain 010/100] SSL Loss: 1.8973
+[Pretrain 020/100] SSL Loss: 1.0982
+[Pretrain 030/100] SSL Loss: 1.0177
+[Pretrain 040/100] SSL Loss: 1.0625
+[Pretrain 050/100] SSL Loss: 0.8192
+[Pretrain 060/100] SSL Loss: 0.7844
+[Pretrain 070/100] SSL Loss: 0.7696
+[Pretrain 080/100] SSL Loss: 0.8754
+[Pretrain 090/100] SSL Loss: 0.5887
+[Pretrain 100/100] SSL Loss: 0.6765
+✅ Pretraining Complete!
+
+📚 Stage 2: FINETUNE (With Labels)
+--------------------------------------------------------------------------------
+finetune for 50 epochs...
+[finetune 01/50] Train L:1.4352 CE:1.4352 Cons:0.0000 A:0.5197 | Test A:0.8514 F1:0.8502
+[finetune 10/50] Train L:0.3074 CE:0.3074 Cons:0.0000 A:0.9693 | Test A:0.9566 F1:0.9566
+[finetune 20/50] Train L:0.2734 CE:0.2734 Cons:0.0000 A:0.9861 | Test A:0.9674 F1:0.9674
+[finetune 30/50] Train L:0.2644 CE:0.2644 Cons:0.0000 A:0.9913 | Test A:0.9701 F1:0.9701
+[finetune 40/50] Train L:0.2603 CE:0.2603 Cons:0.0000 A:0.9931 | Test A:0.9684 F1:0.9684
+[finetune 50/50] Train L:0.2585 CE:0.2585 Cons:0.0000 A:0.9932 | Test A:0.9695 F1:0.9695
+✅ Best Test Acc: 0.9708
+
+   🔍 전이 테스트셋 평가...
+     - [Moderate] Scenario 1 (STANDING↔SITTING): Acc=0.3902 F1=0.2839 (Drop=0.5806)
+     - [Moderate] Scenario 2 (WALKING↔WALKING_UPSTAIRS): Acc=0.4075 F1=0.3057 (Drop=0.5633)
+     - [Strong] Scenario 3 (STANDING↔SITTING): Acc=0.3685 F1=0.2491 (Drop=0.6023)
+     - [Strong] Scenario 4 (WALKING↔WALKING_UPSTAIRS): Acc=0.4069 F1=0.3044 (Drop=0.5640)
+     - [Strong] Scenario 5 (SITTING↔LAYING): Acc=0.3916 F1=0.2803 (Drop=0.5792)
+
+================================================================================
+   실험: SSL_FineTune_Hyperbolic
+================================================================================
+
+📚 Stage 1: Self-Supervised Pretraining (No Labels)
+--------------------------------------------------------------------------------
+Pretraining for 100 epochs...
+[Pretrain 001/100] SSL Loss: 4.8186
+[Pretrain 010/100] SSL Loss: 1.8973
+[Pretrain 020/100] SSL Loss: 1.0982
+[Pretrain 030/100] SSL Loss: 1.0177
+[Pretrain 040/100] SSL Loss: 1.0625
+[Pretrain 050/100] SSL Loss: 0.8192
+[Pretrain 060/100] SSL Loss: 0.7844
+[Pretrain 070/100] SSL Loss: 0.7696
+[Pretrain 080/100] SSL Loss: 0.8754
+[Pretrain 090/100] SSL Loss: 0.5887
+[Pretrain 100/100] SSL Loss: 0.6765
+✅ Pretraining Complete!
+
+📚 Stage 2: FINETUNE (With Labels)
+--------------------------------------------------------------------------------
+finetune for 50 epochs...
+[finetune 01/50] Train L:1.6141 CE:1.6141 Cons:0.0000 A:0.6625 | Test A:0.8884 F1:0.8839
+[finetune 10/50] Train L:0.5404 CE:0.5404 Cons:0.0000 A:0.9699 | Test A:0.9535 F1:0.9537
+[finetune 20/50] Train L:0.3409 CE:0.3409 Cons:0.0000 A:0.9879 | Test A:0.9688 F1:0.9688
+[finetune 30/50] Train L:0.2995 CE:0.2995 Cons:0.0000 A:0.9890 | Test A:0.9698 F1:0.9699
+[finetune 40/50] Train L:0.2814 CE:0.2814 Cons:0.0000 A:0.9935 | Test A:0.9701 F1:0.9702
+[finetune 50/50] Train L:0.2773 CE:0.2773 Cons:0.0000 A:0.9950 | Test A:0.9701 F1:0.9702
+✅ Best Test Acc: 0.9718
+
+   🔍 전이 테스트셋 평가...
+     - [Moderate] Scenario 1 (STANDING↔SITTING): Acc=0.4937 F1=0.4228 (Drop=0.4781)
+     - [Moderate] Scenario 2 (WALKING↔WALKING_UPSTAIRS): Acc=0.4835 F1=0.4106 (Drop=0.4883)
+     - [Strong] Scenario 3 (STANDING↔SITTING): Acc=0.4656 F1=0.3823 (Drop=0.5063)
+     - [Strong] Scenario 4 (WALKING↔WALKING_UPSTAIRS): Acc=0.4785 F1=0.4030 (Drop=0.4934)
+     - [Strong] Scenario 5 (SITTING↔LAYING): Acc=0.4947 F1=0.4160 (Drop=0.4771)
+
+================================================================================
+   📊 SUPERVISED vs TRUE SSL 실험 결과 (최적화 버전)
+================================================================================
+Config                              Method       Mode         Classifier   Orig Acc   Trans Acc   Drop       Retention 
+-------------------------------------------------------------------------------------------------------------------
+Supervised_Linear                   supervised   supervised   Linear       0.9545     0.6058      0.3487  63.47%
+Supervised_Hyperbolic               supervised   supervised   Hyperbolic   0.9505     0.6062      0.3442  63.78%
+SSL_LinearEval_Linear               ssl          linear_eval  Linear       0.9138     0.3942      0.5196  43.14%
+SSL_LinearEval_Hyperbolic           ssl          linear_eval  Hyperbolic   0.9277     0.4162      0.5115  44.86%
+SSL_FineTune_Linear                 ssl          finetune     Linear       0.9708     0.3929      0.5779  40.48%
+SSL_FineTune_Hyperbolic             ssl          finetune     Hyperbolic   0.9718     0.4832      0.4886  49.72%
+
+================================================================================
+📊 레벨별 Retention 분석
+================================================================================
+Config                              Overall      Moderate     Strong      
+--------------------------------------------------------------------------------
+Supervised_Linear                    63.47%       63.94%        63.16%
+Supervised_Hyperbolic                63.78%       64.69%        63.18%
+SSL_LinearEval_Linear                43.14%       43.95%        42.60%
+SSL_LinearEval_Hyperbolic            44.86%       45.68%        44.32%
+SSL_FineTune_Linear                  40.48%       41.09%        40.07%
+SSL_FineTune_Hyperbolic              49.72%       50.28%        49.35%
+
+================================================================================
+📊 상세 비교 분석
+================================================================================
+
+🏆 최종 성능 랭킹 (Overall Retention 기준)
+--------------------------------------------------------------------------------
+   1. Supervised_Hyperbolic               (supervised          ) Retention: 63.78% (Mod: 64.69% | Str: 63.18%)
+   2. Supervised_Linear                   (supervised          ) Retention: 63.47% (Mod: 63.94% | Str: 63.16%)
+   3. SSL_FineTune_Hyperbolic             (ssl-finetune        ) Retention: 49.72% (Mod: 50.28% | Str: 49.35%)
+   4. SSL_LinearEval_Hyperbolic           (ssl-linear_eval     ) Retention: 44.86% (Mod: 45.68% | Str: 44.32%)
+   5. SSL_LinearEval_Linear               (ssl-linear_eval     ) Retention: 43.14% (Mod: 43.95% | Str: 42.60%)
+   6. SSL_FineTune_Linear                 (ssl-finetune        ) Retention: 40.48% (Mod: 41.09% | Str: 40.07%)
+
+================================================================================
+🎯 결론
+================================================================================
+   - 최고 성능: Supervised_Hyperbolic (Retention: 63.78%)
+   - Supervised baseline: 63.78% (Mod: 64.69% | Str: 63.18%)
+   - SSL best: 49.72% (Mod: 50.28% | Str: 49.35%)
+   - Performance gap: 14.06pp
+
+   ✨ 최적화 개선사항:
+   - 정규화 버그 수정 ✅
+   - Cosine + Warmup 스케줄러 ✅
+   - EMA (Exponential Moving Average) ✅
+   - 백본/헤드 분리 학습률 (Fine-tune) ✅
+   - 전이-유사 일관성 손실 (Tail-Head Stitch) ✅
+   - 증강 강도 최적화 (warp: 0.10, cutout: 0.10) ✅
+   - 학습 가능한 Hyperbolic c ✅
+   - 2레벨 전이 시나리오 (Moderate/Strong) ✅
