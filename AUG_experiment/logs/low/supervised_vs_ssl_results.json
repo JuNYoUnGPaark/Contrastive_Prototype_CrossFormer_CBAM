@@ -1,0 +1,200 @@
+[
+  {
+    "config": "Supervised_Linear",
+    "method": "supervised",
+    "mode": "supervised",
+    "classifier": "Linear",
+    "orig_acc": 0.9582626399728538,
+    "orig_f1": 0.9580890855076195,
+    "avg_trans_acc": 0.5077197149643705,
+    "avg_drop": 0.45054292500848325,
+    "retention": 52.98335694050991,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "class_acc": 0.502884289107567,
+        "class_drop": 0.4553783508652868
+      },
+      {
+        "scenario": 2,
+        "class_acc": 0.49304377332880894,
+        "class_drop": 0.4652188666440448
+      },
+      {
+        "scenario": 3,
+        "class_acc": 0.5201900237529691,
+        "class_drop": 0.4380726162198847
+      },
+      {
+        "scenario": 4,
+        "class_acc": 0.5147607736681371,
+        "class_drop": 0.44350186630471666
+      }
+    ]
+  },
+  {
+    "config": "Supervised_Hyperbolic",
+    "method": "supervised",
+    "mode": "supervised",
+    "classifier": "Hyperbolic",
+    "orig_acc": 0.9555480149304377,
+    "orig_f1": 0.9557820038497735,
+    "avg_trans_acc": 0.5973023413640991,
+    "avg_drop": 0.35824567356633863,
+    "retention": 62.50887784090909,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "class_acc": 0.5931455717678995,
+        "class_drop": 0.3624024431625382
+      },
+      {
+        "scenario": 2,
+        "class_acc": 0.5788937902952155,
+        "class_drop": 0.37665422463522225
+      },
+      {
+        "scenario": 3,
+        "class_acc": 0.5941635561588056,
+        "class_drop": 0.36138445877163217
+      },
+      {
+        "scenario": 4,
+        "class_acc": 0.6230064472344757,
+        "class_drop": 0.332541567695962
+      }
+    ]
+  },
+  {
+    "config": "SSL_LinearEval_Linear",
+    "method": "ssl",
+    "mode": "linear_eval",
+    "classifier": "Linear",
+    "orig_acc": 0.9178825924669155,
+    "orig_f1": 0.9169465165461742,
+    "avg_trans_acc": 0.490838140481846,
+    "avg_drop": 0.4270444519850695,
+    "retention": 53.4750462107209,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "class_acc": 0.5022056328469631,
+        "class_drop": 0.41567695961995244
+      },
+      {
+        "scenario": 2,
+        "class_acc": 0.5042416016287751,
+        "class_drop": 0.41364099083814043
+      },
+      {
+        "scenario": 3,
+        "class_acc": 0.4675941635561588,
+        "class_drop": 0.4502884289107567
+      },
+      {
+        "scenario": 4,
+        "class_acc": 0.48931116389548696,
+        "class_drop": 0.42857142857142855
+      }
+    ]
+  },
+  {
+    "config": "SSL_LinearEval_Hyperbolic",
+    "method": "ssl",
+    "mode": "linear_eval",
+    "classifier": "Hyperbolic",
+    "orig_acc": 0.9351883271123176,
+    "orig_f1": 0.9356691707070676,
+    "avg_trans_acc": 0.42687478791991856,
+    "avg_drop": 0.508313539192399,
+    "retention": 45.645863570391874,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "class_acc": 0.43196470987444857,
+        "class_drop": 0.503223617237869
+      },
+      {
+        "scenario": 2,
+        "class_acc": 0.42789277231082457,
+        "class_drop": 0.507295554801493
+      },
+      {
+        "scenario": 3,
+        "class_acc": 0.4336613505259586,
+        "class_drop": 0.501526976586359
+      },
+      {
+        "scenario": 4,
+        "class_acc": 0.4139803189684425,
+        "class_drop": 0.521208008143875
+      }
+    ]
+  },
+  {
+    "config": "SSL_FineTune_Linear",
+    "method": "ssl",
+    "mode": "finetune",
+    "classifier": "Linear",
+    "orig_acc": 0.9796403121818799,
+    "orig_f1": 0.980173857089279,
+    "avg_trans_acc": 0.5249406175771971,
+    "avg_drop": 0.45469969460468274,
+    "retention": 53.585036369934194,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "class_acc": 0.5188327112317611,
+        "class_drop": 0.46080760095011875
+      },
+      {
+        "scenario": 2,
+        "class_acc": 0.5147607736681371,
+        "class_drop": 0.46487953851374275
+      },
+      {
+        "scenario": 3,
+        "class_acc": 0.5357991177468612,
+        "class_drop": 0.4438411944350187
+      },
+      {
+        "scenario": 4,
+        "class_acc": 0.5303698676620292,
+        "class_drop": 0.44927044451985065
+      }
+    ]
+  },
+  {
+    "config": "SSL_FineTune_Hyperbolic",
+    "method": "ssl",
+    "mode": "finetune",
+    "classifier": "Hyperbolic",
+    "orig_acc": 0.9776043434000679,
+    "orig_f1": 0.9777885567824577,
+    "avg_trans_acc": 0.49295894129623347,
+    "avg_drop": 0.4846454021038344,
+    "retention": 50.425199583477955,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "class_acc": 0.48998982015609094,
+        "class_drop": 0.4876145232439769
+      },
+      {
+        "scenario": 2,
+        "class_acc": 0.4876145232439769,
+        "class_drop": 0.48998982015609094
+      },
+      {
+        "scenario": 3,
+        "class_acc": 0.495758398371225,
+        "class_drop": 0.48184594502884287
+      },
+      {
+        "scenario": 4,
+        "class_acc": 0.49847302341364097,
+        "class_drop": 0.4791313199864269
+      }
+    ]
+  }
+]
