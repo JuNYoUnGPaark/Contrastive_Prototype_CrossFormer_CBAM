@@ -14,7 +14,7 @@
         - **`SSL_basic_high` (강한 증강):** 가장 높은 **절대 성능 (98.03%)**을 달성
         - **`SSL_basic_low` (약한 증강):** 가장 높은 **견고성 (Retention 88.90%)**
 
-1. Supervise 모델은 증강과 무관하므로 SSL 모델만 비교 (모두 95% 정도의 성능 달성)
+3. Supervise 모델은 증강과 무관하므로 SSL 모델만 비교 (모두 95% 정도의 성능 달성)
     
     
     | **Config** | **Weak Aug (Low)** | **Strong Aug (High)** | **승자** |
@@ -37,4 +37,10 @@
     - 약한 증강이 SSL-Finetune 모델에서 일관되게 더 높은 retention 보임.
     - 특히, SSL_FineTune_Hyperbolic(Strong Aug) 모델의 견고성이 가장 낮았다.
     
+
     → 대체로 증강 정도가 높을수록 안정성은 떨어지는 Trade-off 관계성 보임.
+
+4. 결과 시각화
+<img width="1790" height="889" alt="image" src="https://github.com/user-attachments/assets/61237798-0749-4d29-ade5-6aa68330eea4" />
+<img width="1790" height="889" alt="image" src="https://github.com/user-attachments/assets/b34e734f-a0b8-4755-b7fb-84d6e1d1fe70" />
+<img width="1790" height="889" alt="image" src="https://github.com/user-attachments/assets/f53d0647-501a-45bf-b6b1-83f78279d7e1" />
