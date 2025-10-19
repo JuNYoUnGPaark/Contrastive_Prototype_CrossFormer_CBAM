@@ -52,6 +52,10 @@ UCI HAR Dataset/ \
 
 `1.2`: Transitional Test Set에 이중 정규화되는 문제 한번만 하도록 수정
 
+#### 7. Files
+- `SSL_basic~`: 가장 기본적인 실험 파일
+- `SSL_improve~`: 다수의 기능을 추가한 파일 (consistency loss, EMA, cos-warmup scheduler, learnable hyperbolic_c 등
+
 #### 7. Reference
 Anguita, D., Ghio, A., Oneto, L., Parra, X., & Reyes-Ortiz, J. L. (2013).
 A Public Domain Dataset for Human Activity Recognition Using Smartphones.
