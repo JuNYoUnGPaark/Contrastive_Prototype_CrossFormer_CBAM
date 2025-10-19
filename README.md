@@ -45,7 +45,14 @@ UCI HAR Dataset/ \
 - 데이터 크기 적절
 - Label이 명확하여 HAR 연구의 표준 실험 환경으로 사용
 
-#### 6. Reference
+#### 6. Versions
+`1.0`: Test set에 자체적으로 정규화하는 문제 발생 
+
+`1.1`: Train set의 정규화 값을 Test set에 정상적으로 정규화하도록 수정
+
+`1.2`: Transitional Test Set에 이중 정규화되는 문제 한번만 하도록 수정
+
+#### 7. Reference
 Anguita, D., Ghio, A., Oneto, L., Parra, X., & Reyes-Ortiz, J. L. (2013).
 A Public Domain Dataset for Human Activity Recognition Using Smartphones.
 21st European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning (ESANN 2013).\
