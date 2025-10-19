@@ -1,0 +1,428 @@
+[
+  {
+    "config": "Supervised_Linear",
+    "method": "supervised",
+    "mode": "supervised",
+    "classifier": "Linear",
+    "orig_acc": 0.9545300305395318,
+    "orig_f1": 0.9551017631944219,
+    "avg_trans_acc": 0.6058364438411944,
+    "avg_trans_f1": 0.5690423309760047,
+    "avg_drop": 0.3486935866983374,
+    "retention": 63.46960540348382,
+    "retention_moderate": 63.93530039104158,
+    "retention_strong": 63.15914207844532,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "level": "Moderate",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.5,
+        "mix": 0.4,
+        "class_acc": 0.6182558534102477,
+        "class_f1": 0.5869202459301733,
+        "class_drop": 0.3362741771292841
+      },
+      {
+        "scenario": 2,
+        "level": "Moderate",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.55,
+        "mix": 0.42,
+        "class_acc": 0.6023074312860536,
+        "class_f1": 0.5673810072062163,
+        "class_drop": 0.3522225992534782
+      },
+      {
+        "scenario": 3,
+        "level": "Strong",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.7,
+        "mix": 0.55,
+        "class_acc": 0.6026467594163556,
+        "class_f1": 0.5627016730756075,
+        "class_drop": 0.3518832711231762
+      },
+      {
+        "scenario": 4,
+        "level": "Strong",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.65,
+        "mix": 0.52,
+        "class_acc": 0.5894129623345775,
+        "class_f1": 0.5494787659861919,
+        "class_drop": 0.36511706820495426
+      },
+      {
+        "scenario": 5,
+        "level": "Strong",
+        "class_A": "SITTING",
+        "class_B": "LAYING",
+        "p": 0.75,
+        "mix": 0.58,
+        "class_acc": 0.6165592127587377,
+        "class_f1": 0.5787299626818337,
+        "class_drop": 0.3379708177807941
+      }
+    ]
+  },
+  {
+    "config": "Supervised_Hyperbolic",
+    "method": "supervised",
+    "mode": "supervised",
+    "classifier": "Hyperbolic",
+    "orig_acc": 0.9504580929759077,
+    "orig_f1": 0.9505198412737456,
+    "avg_trans_acc": 0.6062436375975568,
+    "avg_trans_f1": 0.5137949555282082,
+    "avg_drop": 0.3442144553783508,
+    "retention": 63.78436272759729,
+    "retention_moderate": 64.69118172081399,
+    "retention_strong": 63.17981673211948,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "level": "Moderate",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.5,
+        "mix": 0.4,
+        "class_acc": 0.6023074312860536,
+        "class_f1": 0.5079298908664373,
+        "class_drop": 0.3481506616898541
+      },
+      {
+        "scenario": 2,
+        "level": "Moderate",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.55,
+        "mix": 0.42,
+        "class_acc": 0.6274177129284018,
+        "class_f1": 0.5442377995898302,
+        "class_drop": 0.3230403800475059
+      },
+      {
+        "scenario": 3,
+        "level": "Strong",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.7,
+        "mix": 0.55,
+        "class_acc": 0.5693926026467594,
+        "class_f1": 0.4696999930353843,
+        "class_drop": 0.38106549032914827
+      },
+      {
+        "scenario": 4,
+        "level": "Strong",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.65,
+        "mix": 0.52,
+        "class_acc": 0.6274177129284018,
+        "class_f1": 0.5453218318257815,
+        "class_drop": 0.3230403800475059
+      },
+      {
+        "scenario": 5,
+        "level": "Strong",
+        "class_A": "SITTING",
+        "class_B": "LAYING",
+        "p": 0.75,
+        "mix": 0.58,
+        "class_acc": 0.6046827281981676,
+        "class_f1": 0.501785262323608,
+        "class_drop": 0.34577536477774007
+      }
+    ]
+  },
+  {
+    "config": "SSL_LinearEval_Linear",
+    "method": "ssl",
+    "mode": "linear_eval",
+    "classifier": "Linear",
+    "orig_acc": 0.9138106549032915,
+    "orig_f1": 0.9131838188292866,
+    "avg_trans_acc": 0.394231421784866,
+    "avg_trans_f1": 0.29356106270225246,
+    "avg_drop": 0.5195792331184255,
+    "retention": 43.141477905681406,
+    "retention_moderate": 43.94727070181954,
+    "retention_strong": 42.60428270825598,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "level": "Moderate",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.5,
+        "mix": 0.4,
+        "class_acc": 0.39362063115032236,
+        "class_f1": 0.293868062876306,
+        "class_drop": 0.5201900237529691
+      },
+      {
+        "scenario": 2,
+        "level": "Moderate",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.55,
+        "mix": 0.42,
+        "class_acc": 0.4095690532745165,
+        "class_f1": 0.31137832109748376,
+        "class_drop": 0.504241601628775
+      },
+      {
+        "scenario": 3,
+        "level": "Strong",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.7,
+        "mix": 0.55,
+        "class_acc": 0.3773328808958263,
+        "class_f1": 0.27258947027564057,
+        "class_drop": 0.5364777740074652
+      },
+      {
+        "scenario": 4,
+        "level": "Strong",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.65,
+        "mix": 0.52,
+        "class_acc": 0.40889039701391244,
+        "class_f1": 0.3102001495030823,
+        "class_drop": 0.504920257889379
+      },
+      {
+        "scenario": 5,
+        "level": "Strong",
+        "class_A": "SITTING",
+        "class_B": "LAYING",
+        "p": 0.75,
+        "mix": 0.58,
+        "class_acc": 0.3817441465897523,
+        "class_f1": 0.27976930975874953,
+        "class_drop": 0.5320665083135392
+      }
+    ]
+  },
+  {
+    "config": "SSL_LinearEval_Hyperbolic",
+    "method": "ssl",
+    "mode": "linear_eval",
+    "classifier": "Hyperbolic",
+    "orig_acc": 0.9277231082456736,
+    "orig_f1": 0.9273206659658252,
+    "avg_trans_acc": 0.41621988462843573,
+    "avg_trans_f1": 0.33447621824416895,
+    "avg_drop": 0.5115032236172379,
+    "retention": 44.8646671543526,
+    "retention_moderate": 45.683979517190934,
+    "retention_strong": 44.31845891246038,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "level": "Moderate",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.5,
+        "mix": 0.4,
+        "class_acc": 0.42246352222599254,
+        "class_f1": 0.34430421924064053,
+        "class_drop": 0.5052595860196811
+      },
+      {
+        "scenario": 2,
+        "level": "Moderate",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.55,
+        "mix": 0.42,
+        "class_acc": 0.4251781472684085,
+        "class_f1": 0.34561637710411147,
+        "class_drop": 0.5025449609772651
+      },
+      {
+        "scenario": 3,
+        "level": "Strong",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.7,
+        "mix": 0.55,
+        "class_acc": 0.4041398031896844,
+        "class_f1": 0.3181399756851239,
+        "class_drop": 0.5235833050559893
+      },
+      {
+        "scenario": 4,
+        "level": "Strong",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.65,
+        "mix": 0.52,
+        "class_acc": 0.4221241940956905,
+        "class_f1": 0.34079698438895073,
+        "class_drop": 0.505598914149983
+      },
+      {
+        "scenario": 5,
+        "level": "Strong",
+        "class_A": "SITTING",
+        "class_B": "LAYING",
+        "p": 0.75,
+        "mix": 0.58,
+        "class_acc": 0.40719375636240246,
+        "class_f1": 0.32352353480201834,
+        "class_drop": 0.5205293518832712
+      }
+    ]
+  },
+  {
+    "config": "SSL_FineTune_Linear",
+    "method": "ssl",
+    "mode": "finetune",
+    "classifier": "Linear",
+    "orig_acc": 0.9708177807940278,
+    "orig_f1": 0.9708234565158472,
+    "avg_trans_acc": 0.3929419748897184,
+    "avg_trans_f1": 0.28466184436502673,
+    "avg_drop": 0.5778758059043094,
+    "retention": 40.47535826634044,
+    "retention_moderate": 41.08703250611674,
+    "retention_strong": 40.06757543982291,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "level": "Moderate",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.5,
+        "mix": 0.4,
+        "class_acc": 0.39022734984730234,
+        "class_f1": 0.283858382658183,
+        "class_drop": 0.5805904309467255
+      },
+      {
+        "scenario": 2,
+        "level": "Moderate",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.55,
+        "mix": 0.42,
+        "class_acc": 0.4075330844927044,
+        "class_f1": 0.305661482312564,
+        "class_drop": 0.5632846963013234
+      },
+      {
+        "scenario": 3,
+        "level": "Strong",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.7,
+        "mix": 0.55,
+        "class_acc": 0.36851034950797423,
+        "class_f1": 0.2490666981826697,
+        "class_drop": 0.6023074312860536
+      },
+      {
+        "scenario": 4,
+        "level": "Strong",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.65,
+        "mix": 0.52,
+        "class_acc": 0.40685442823210044,
+        "class_f1": 0.3044224662471517,
+        "class_drop": 0.5639633525619274
+      },
+      {
+        "scenario": 5,
+        "level": "Strong",
+        "class_A": "SITTING",
+        "class_B": "LAYING",
+        "p": 0.75,
+        "mix": 0.58,
+        "class_acc": 0.39158466236851036,
+        "class_f1": 0.28030019242456505,
+        "class_drop": 0.5792331184255175
+      }
+    ]
+  },
+  {
+    "config": "SSL_FineTune_Hyperbolic",
+    "method": "ssl",
+    "mode": "finetune",
+    "classifier": "Hyperbolic",
+    "orig_acc": 0.9718357651849339,
+    "orig_f1": 0.971959855604164,
+    "avg_trans_acc": 0.48320325755005095,
+    "avg_trans_f1": 0.4069365029969309,
+    "avg_drop": 0.4886325076348829,
+    "retention": 49.72067039106146,
+    "retention_moderate": 50.27932960893855,
+    "retention_strong": 49.34823091247672,
+    "transition_results": [
+      {
+        "scenario": 1,
+        "level": "Moderate",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.5,
+        "mix": 0.4,
+        "class_acc": 0.493722429589413,
+        "class_f1": 0.4227863612939662,
+        "class_drop": 0.4781133355955209
+      },
+      {
+        "scenario": 2,
+        "level": "Moderate",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.55,
+        "mix": 0.42,
+        "class_acc": 0.4835425856803529,
+        "class_f1": 0.4105519956278077,
+        "class_drop": 0.48829317950458095
+      },
+      {
+        "scenario": 3,
+        "level": "Strong",
+        "class_A": "STANDING",
+        "class_B": "SITTING",
+        "p": 0.7,
+        "mix": 0.55,
+        "class_acc": 0.4655581947743468,
+        "class_f1": 0.38233711549150456,
+        "class_drop": 0.5062775704105871
+      },
+      {
+        "scenario": 4,
+        "level": "Strong",
+        "class_A": "WALKING",
+        "class_B": "WALKING_UPSTAIRS",
+        "p": 0.65,
+        "mix": 0.52,
+        "class_acc": 0.47845266372582285,
+        "class_f1": 0.4030032964403665,
+        "class_drop": 0.493383101459111
+      },
+      {
+        "scenario": 5,
+        "level": "Strong",
+        "class_A": "SITTING",
+        "class_B": "LAYING",
+        "p": 0.75,
+        "mix": 0.58,
+        "class_acc": 0.494740413980319,
+        "class_f1": 0.41600374613100977,
+        "class_drop": 0.4770953512046149
+      }
+    ]
+  }
+]
