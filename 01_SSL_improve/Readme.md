@@ -10,6 +10,7 @@
     - **`SSL_FineTune_Hyperbolic`**: Orig **Acc** 0.6634
     - **`SSL_FineTune_Linear`**: Orig **Acc** 0.3946
     <img width="1189" height="689" alt="image" src="https://github.com/user-attachments/assets/e6b12c9e-87e6-49ed-bd7d-27bdba05e024" />
+    
     - **`Supervised_Hyperbolic`**: 92.52% (Mod: 96.11% | Str: 90.13%)
     - **`SSL_FineTune_Hyperbolic`**: 92.28% (Mod: 97.77% | Str: 88.61%)
     - **`Supervised_Linear`**: 91.62% (Mod: 94.91% | Str: 89.42%)
@@ -32,3 +33,4 @@
 
 <img width="1121" height="789" alt="image" src="https://github.com/user-attachments/assets/0cb74c57-b32f-47dd-9e23-90cf6a08c414" />
 <img width="1113" height="789" alt="image" src="https://github.com/user-attachments/assets/7a23b4ea-1b61-4c8d-826c-5972cf243ac4" />
+
