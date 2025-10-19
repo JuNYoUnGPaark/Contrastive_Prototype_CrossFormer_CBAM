@@ -7,19 +7,23 @@
     - **`SSL_FineTune_Hyperbolic`**: Orig Acc **0.9684 (!!)**
     - **`Supervised_Linear`**: Orig Acc 0.9450
     - **`Supervised_Hyperbolic`**: Orig Acc 0.9372
-    
+    <img width="1189" height="689" alt="image" src="https://github.com/user-attachments/assets/f5d830e2-74eb-413e-b03e-4685077d03f6" />
+
     - 전이 set에서의 retention
     - **`Supervised_Hyperbolic`**: 91.60%
     - **`SSL_FineTune_Hyperbolic`**: 90.94%
     - **`Supervised_Linear`**: 90.09%
     - **`SSL_FineTune_Linear`**: 89.46%
-    
+    <img width="1189" height="689" alt="image" src="https://github.com/user-attachments/assets/9162077e-c897-4b01-807a-489ae2109ad7" />
+
 3. Linear vs Hyperbolic
     - Supervised
         - **Linear (0.9450)** > Hyperbolic (0.9372) (Linear 0.8%p 근소 우위)
     - SSL-FineTune
         - **Linear (0.9790)** > Hyperbolic (0.9684) (Linear 1.06%p 근소 우위)
-        
+    <img width="830" height="790" alt="image" src="https://github.com/user-attachments/assets/7a0ef4b8-e256-4788-b810-8524638835a7" />
+    <img width="990" height="689" alt="image" src="https://github.com/user-attachments/assets/83e21f03-fb00-4195-ae4b-386f3077993d" />
+
 4. EMA On/Off 비교
     
     
@@ -31,4 +35,8 @@
     | **SSL_FineTune_Hyperbolic** | **Acc** | 0.6610 | **0.9684** | **+0.3074 (!!!)** |
 
     - EMA On 상태에서는 SSL feature에 Hyperbolic Classifier 분류기가 압도적으로 우수했지만 EMA Off 시 Linear Classifier가 Supervised, SSL_FineTune 환경 모두에서 Hyperbolic Classifier보다 근소하게 더 나은 성능을 보임.
+
     - EMA가 성능 저해의 원인으로 보임. SSL 학습 붕괴의 핵심 요인으로 판단됨.
+  
+<img width="1121" height="789" alt="image" src="https://github.com/user-attachments/assets/c2d85b25-edc7-43ec-9d7b-af1c86ec73fb" />
+<img width="1113" height="789" alt="image" src="https://github.com/user-attachments/assets/309a4da1-be67-4a52-8d2b-3a9fc03db4fb" />
