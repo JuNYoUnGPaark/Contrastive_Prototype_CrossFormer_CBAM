@@ -23,4 +23,7 @@
 - **Baseline:** 92.60%
 - **+ CrossFormer (핵심):** 94.06% (+1.46%)
 - **+ CrossFormer + CBAM (시너지):** 95.28% (+1.22%)
+
 - **+ CrossFormer + CBAM + Contrast (최종 튜닝):** **95.32%** (+0.04%)
+
+<img width="1994" height="590" alt="image" src="https://github.com/user-attachments/assets/1100984c-035a-4c8b-b637-64fd5f7955f4" />
