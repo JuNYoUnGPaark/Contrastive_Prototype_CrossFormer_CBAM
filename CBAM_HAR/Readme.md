@@ -1,4 +1,4 @@
-# Prototype_CrossFormer_with_CBAM 분석
+# `Prototype_CrossFormer_with_CBAM` Model 분석
 
 ( `D=64` (즉, `embed_dim=64`)라고 가정)
 
