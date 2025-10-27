@@ -22,6 +22,7 @@
 - train: 21명 (70%)
 - test: 9명 (30%)
 
+'''
 UCI HAR Dataset/ \
 │\
 ├── train/\
@@ -33,7 +34,7 @@ UCI HAR Dataset/ \
 │ ├── Inertial Signals/\
 │ ├── X_test.txt\
 └ ├── y_test.txt\
-
+'''
 
 #### 4. Input Format - DL
 - (N, C, T)
